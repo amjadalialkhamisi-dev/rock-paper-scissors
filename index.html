@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>game</title>
+  </head>
+  <body>
+    <script>
+      let humanScore = 0;
+      let computerScore = 0;
+      let er = false;
+
+      function getComputerChoice() {
+        let random = Math.floor(Math.random() * 100);
+
+        if (random > 66) {
+          return "rock";
+        } else if (random > 33) {
+          return "paper";
+        } else {
+          return "scissors";
+        }
+      }
+
+      function getHumanChoice() {
+        let input = prompt("enter yours: ").trim().toLowerCase();
+        console.log(input)
+        if (input === "rock" || input === "paper" || input === "scissors") {
+          return input;
+        } else {
+          console.log("enter a right value");
+          
+          return getHumanChoice();
+        }
+      }
+
+      function round(humanC, computerC) {
+        if (humanC == computerC) {
+          return "draw";
+        } else if (
+          (humanC == "rock" && computerC == "scissors") ||
+          (humanC == "scissors" && computerC == "paper") ||
+          (humanC == "paper" && computerC == "rock")
+        ) {
+          humanScore++;
+          return "human won this round";
+        } else {
+          computerScore++;
+          return "computer won this round";
+        }
+      }
+
+      function displayResult(result, humanres, computerres, hc, cc) {
+        console.log("human choice: " + hc);
+        console.log("computer choice: " + cc);
+        console.log(result);
+        console.log("current human sccore: " + humanres);
+        console.log("current computer sccore: " + computerres);
+      }
+
+     function agame() {
+        
+     let humanChoice = getHumanChoice();
+
+      if (!er) {
+        let computerChoice = getComputerChoice();
+        let roundRes = round(humanChoice, computerChoice);
+
+        displayResult(
+          roundRes,
+          humanScore,
+          computerScore,
+          humanChoice,
+          computerChoice,
+        );
+      } else {
+        console.log(humanChoice);
+      }
+     }
+
+
+     function gamefull() {
+        agame();
+        agame();
+        agame();
+        agame();
+        agame();
+        if (humanScore > computerScore) {
+            console.log("human wins!");
+        }else if (humanScore < computerScore){
+            console.log("AI will destroy us");
+        }else{
+            console.log("draw and peace")
+        }
+     }    
+
+
+        gamefull();
+    </script>
+  </body>
+</html>
